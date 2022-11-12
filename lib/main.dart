@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ucl_assistant/api/api.dart';
 import 'package:ucl_assistant/constants.dart';
+import 'package:ucl_assistant/navigation_service.dart';
 import 'package:ucl_assistant/pages/home_page.dart';
 import 'package:ucl_assistant/pages/login_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -49,6 +50,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'UCL Assistant',
+      navigatorKey: NavigationService.navigatorKey,
       theme: ThemeData(
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
