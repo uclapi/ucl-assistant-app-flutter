@@ -1,5 +1,5 @@
 name: ucl_assistant
-description: A new Flutter project.
+description: UCL Assistant mobile app
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -36,11 +36,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   oauth2: ^2.0.0
-  flutter_web_auth: ^0.4.1
-  flutter_secure_storage: ^6.0.0
+  flutter_web_auth: ^0.5.0
+  flutter_secure_storage: ^7.0.0
   url_launcher: ^6.1.6
   http: ^0.13.5
-  package_info_plus: ^1.4.3+1
+  package_info_plus: ^3.0.0
   flutter_map: ^3.0.0
   latlong2: ^0.8.1
   flutter_svg: ^1.1.5
@@ -49,7 +49,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.10.0"
+  flutter_launcher_icons: ^0.11.0
   flutter_lints: ^2.0.0
 
 flutter_icons:
