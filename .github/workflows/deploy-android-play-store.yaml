@@ -10,8 +10,8 @@ on:
 jobs:
   deploy:
     name: Build Android app and release to Internal Play Store track
-    needs: version
     runs-on: ubuntu-latest
+    environment: Android Beta
     steps:
       - uses: actions/checkout@v3
 
@@ -54,6 +54,6 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT_KEY_JSON }}
           packageName: com.uclapi.uclassistant
-          releaseFiles: app-release.aab
-          track: alpha
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          track: beta
           status: completed
