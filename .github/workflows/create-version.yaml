@@ -1,0 +1,40 @@
+name: Create Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  version:
+    name: Update version number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update version numbers
+        env:
+          UCLAPI_VERSION: "${{ github.event.inputs.version }}"
+        run: |
+          BUILD_NUMBER=`grep 'version:' pubspec.yaml | cut -d '+' -f 2`
+          NEW_BUILD_NUMBER=$(($BUILD_NUMBER + 1))
+          sed -i 's/version: .*/version: ${{ steps.version.outputs.content }}+$BUILD_NUMBER/g' pubspec.yaml
+      - name: Create commits
+        env:
+          VERSION: "${{ github.event.inputs.version }}"
+        run: |
+          git config user.name 'Github Actions'
+          git config user.email 'actions@github.com'
+          git add -A
+          git commit -m "version: $VERSION"
+          git tag -a "$VERSION" -m "$VERSION"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: "Release v${{ github.event.inputs.version }}"
+          delete-branch: true
+          branch: "releases/${{ github.event.inputs.version }}"
