@@ -38,7 +38,7 @@ class _SearchStudySpacesPageState extends State<SearchStudySpacesPage> {
               errorMessage = null;
             }))
         .catchError((e) => setState(() {
-              errorMessage = e;
+              errorMessage = e.toString();
               loading = false;
             }));
 

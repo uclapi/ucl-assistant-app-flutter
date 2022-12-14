@@ -28,7 +28,7 @@ class _SearchPeoplePageState extends State<SearchPeoplePage> {
               errorMessage = null;
             }))
         .catchError((e) => setState(() {
-              errorMessage = e;
+              errorMessage = e.toString();
             }));
   }
 

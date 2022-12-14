@@ -37,7 +37,7 @@ class _TimetablePageState extends State<TimetablePage> {
           }),
         )
         .catchError((e) => setState(() {
-              errorMessage = e;
+              errorMessage = e.toString();
             }));
   }
 

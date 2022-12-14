@@ -32,7 +32,7 @@ class _SearchRoomsPageState extends State<SearchRoomsPage> {
               errorMessage = null;
             }))
         .catchError((e) => setState(() {
-              errorMessage = e;
+              errorMessage = e.toString();
             }));
   }
 
