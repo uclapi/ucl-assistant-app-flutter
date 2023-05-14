@@ -20,48 +20,46 @@ class LibcalBookingListItem extends StatelessWidget {
       child: Row(
         children: [
           Flexible(
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${booking.seatName} (${booking.locationName})'),
-                  Text('Check-in code: ${booking.checkInCode}'),
-                  Text(booking.slot.toString()),
-                  Text(
-                    booking.status,
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                  if (booking.cancelledDate == null) ...[
-                    GradientButton(
-                        child: const Text('Cancel?'),
-                        onPressed: () async {
-                          final success = await API()
-                              .libcal()
-                              .cancelBooking(booking.bookingId);
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('${booking.seatName} (${booking.locationName})'),
+                Text('Check-in code: ${booking.checkInCode}'),
+                Text(booking.slot.toString()),
+                Text(
+                  booking.status,
+                  style: Theme.of(context).textTheme.caption,
+                ),
+                if (booking.cancelledDate == null) ...[
+                  GradientButton(
+                      child: const Text('Cancel?'),
+                      onPressed: () async {
+                        final success = await API()
+                            .libcal()
+                            .cancelBooking(booking.bookingId);
 
-                          if (success) {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.success,
-                              title: 'Booking Cancelled',
-                              btnOkOnPress: () => Navigator.pop(context),
-                            ).show();
-                          } else {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              title: 'Cancellation Failed',
-                              desc:
-                                  'There was an error cancelling your slot. Please try again.',
-                              btnOkOnPress: () => Navigator.pop(context),
-                              btnOkColor: Colors.red,
-                              btnOkText: 'Close',
-                            ).show();
-                          }
-                        })
-                  ]
-                ],
-              ),
+                        if (success) {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            title: 'Booking Cancelled',
+                            btnOkOnPress: () => Navigator.pop(context),
+                          ).show();
+                        } else {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            title: 'Cancellation Failed',
+                            desc:
+                                'There was an error cancelling your slot. Please try again.',
+                            btnOkOnPress: () => Navigator.pop(context),
+                            btnOkColor: Colors.red,
+                            btnOkText: 'Close',
+                          ).show();
+                        }
+                      })
+                ]
+              ],
             ),
           ),
         ],
