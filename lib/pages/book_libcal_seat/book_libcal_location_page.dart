@@ -19,11 +19,12 @@ class BookLibcalLocationPage extends StatefulWidget {
 }
 
 class _BookLibcalLocationPageState extends State<BookLibcalLocationPage> {
-  String search = '';
-
   bool singleSpace = true;
   int dayOffset = 0;
   String time = getClosestHalfHour();
+
+  // Use to trigger re-render when space detail modal closes
+  Key _refreshKey = UniqueKey();
 
   Future<List<Widget>> getSeats() async {
     DateTime selectedDate = DateTime.now().add(Duration(days: dayOffset));
@@ -47,10 +48,15 @@ class _BookLibcalLocationPageState extends State<BookLibcalLocationPage> {
             date: date,
             startTime: contiguousSlot.from,
             endTime: contiguousSlot.to,
+            onDismiss: () => setState(() => _refreshKey = UniqueKey()),
           ));
         }
       } else {
-        items.add(LibcalBookableSpaceListItem(space: space, date: date));
+        items.add(LibcalBookableSpaceListItem(
+          space: space,
+          date: date,
+          onDismiss: () => setState(() => _refreshKey = UniqueKey()),
+        ));
       }
     }
 
@@ -126,6 +132,7 @@ class _BookLibcalLocationPageState extends State<BookLibcalLocationPage> {
             ),
             FutureBuilder(
               future: getSeats(),
+              key: _refreshKey,
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return const Loading();

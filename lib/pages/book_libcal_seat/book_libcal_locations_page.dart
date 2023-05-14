@@ -15,17 +15,10 @@ class BookLibcalLocationsPage extends StatefulWidget {
 }
 
 class _BookLibcalLocationsPageState extends State<BookLibcalLocationsPage> {
-  String search = '';
   bool loading = true;
   String? errorMessage;
   List<LibcalLocation> locationResults = [];
   final textController = TextEditingController();
-
-  void handleSubmit() {
-    setState(() {
-      search = textController.text;
-    });
-  }
 
   @override
   void initState() {
@@ -42,10 +35,6 @@ class _BookLibcalLocationsPageState extends State<BookLibcalLocationsPage> {
               errorMessage = e.toString();
               loading = false;
             }));
-
-    textController.addListener(() {
-      handleSubmit();
-    });
   }
 
   @override
@@ -58,15 +47,6 @@ class _BookLibcalLocationsPageState extends State<BookLibcalLocationsPage> {
     List<Widget> items = [];
     for (var i = 0; i < locationResults.length; i++) {
       final location = locationResults[i];
-
-      if (textController.text.isNotEmpty &&
-          !location.name
-              .toString()
-              .toLowerCase()
-              .contains(textController.text.toLowerCase())) {
-        continue;
-      }
-
       items.add(LibcalLocationListItem(location: location));
     }
 
@@ -86,32 +66,7 @@ class _BookLibcalLocationsPageState extends State<BookLibcalLocationsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Header(text: "Book a study space", bold: true),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: textController,
-                        onSubmitted: (_) => handleSubmit(),
-                        decoration: InputDecoration(
-                          isDense: true,
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              textController.clear();
-                            },
-                            icon: const Icon(Icons.clear),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
-                          ),
-                          filled: true,
-                          fillColor: const Color(0xffeaeaea),
-                          hintText: "Search for a location...",
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                const Text('Choose a location:'),
                 if (loading) ...[
                   const Loading()
                 ] else if (errorMessage != null) ...[

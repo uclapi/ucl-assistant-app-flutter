@@ -8,11 +8,13 @@ class LibcalBookableSpaceListItem extends StatelessWidget {
       {super.key,
       required this.space,
       required this.date,
+      required this.onDismiss,
       this.startTime,
       this.endTime});
 
   final LibcalSpace space;
   final String date;
+  final Function() onDismiss;
   final String? startTime;
   final String? endTime;
 
@@ -32,7 +34,7 @@ class LibcalBookableSpaceListItem extends StatelessWidget {
                 latestEndTime: endTime),
           );
         },
-      ),
+      ).whenComplete(onDismiss),
       child: Container(
         padding: const EdgeInsets.all(3),
         margin: const EdgeInsets.only(bottom: 5),

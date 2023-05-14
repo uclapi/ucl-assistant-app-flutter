@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:ucl_assistant/api/api.dart';
 import 'package:ucl_assistant/helpers.dart';
@@ -30,7 +31,7 @@ class _LibcalSpaceDetailState extends State<LibcalSpaceDetail> {
   String chosenToTime = '';
 
   Future<bool> makeBooking() async {
-    final response = await API().libcal().bookSpace(
+    final bool success = await API().libcal().bookSpace(
           spaceId: widget.space.spaceId,
           date: widget.date,
           from: chosenFromTime,
@@ -40,7 +41,28 @@ class _LibcalSpaceDetailState extends State<LibcalSpaceDetail> {
               : null,
         );
 
-    return response;
+    if (!success) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        title: 'Booking Successful',
+        desc: 'Please check your email for your booking confirmation.',
+        btnOkOnPress: () => Navigator.pop(context),
+      ).show();
+    } else {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        title: 'Booking Failed',
+        desc:
+            'There was an error booking your slot. The availability may have changed. Please try again.',
+        btnOkOnPress: () => Navigator.pop(context),
+        btnOkColor: Colors.red,
+        btnOkText: 'Close',
+      ).show();
+    }
+
+    return success;
   }
 
   List<String> getFromTimes() {

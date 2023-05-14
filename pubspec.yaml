@@ -45,6 +45,7 @@ dependencies:
   latlong2: ^0.8.1
   flutter_svg: ^1.1.5
   sentry_flutter: ^6.12.1
+  awesome_dialog: ^3.0.2
 
 dev_dependencies:
   flutter_test:

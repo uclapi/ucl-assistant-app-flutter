@@ -74,8 +74,6 @@ class LibcalAPI {
       throw 'There was an error reserving your space :(';
     }
 
-    print(response);
-
     final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
     print(decodedResponse);
     return decodedResponse['content']['ok'];
