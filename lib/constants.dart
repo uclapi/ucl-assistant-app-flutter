@@ -23,6 +23,8 @@ const API_LIVE_IMAGE_URL =
 
 const API_LIBCAL_LOCATIONS_URL = '$UCL_ASSISTANT_API_URL/libcal/locations';
 const API_LIBCAL_SPACES_URL = '$UCL_ASSISTANT_API_URL/libcal/spaces';
+const API_LIBCAL_PERSONAL_BOOKINGS_URL =
+    '$UCL_ASSISTANT_API_URL/libcal/bookings';
 
 const LIBCAL_BOOK_FILTER_ANYTIME = 'Anytime';
 

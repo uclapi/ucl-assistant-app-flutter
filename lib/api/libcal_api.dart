@@ -79,6 +79,19 @@ class LibcalAPI {
     return decodedResponse['content']['ok'];
   }
 
+  Future<List<LibcalBooking>> getPersonalBookings() async {
+    final response =
+        await client.get(Uri.parse(API_LIBCAL_PERSONAL_BOOKINGS_URL));
+    if (response.statusCode != 200) {
+      throw 'There was an error loading your bookings :(';
+    }
+
+    final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    return (decodedResponse['content']['bookings'] as List)
+        .map((space) => _parseJsonBooking(space))
+        .toList();
+  }
+
   LibcalLocation _parseJsonLocation(Map json) {
     return LibcalLocation(
       id: json['lid'],
@@ -109,6 +122,17 @@ class LibcalAPI {
       image: json['image'],
       availability: json['availability'],
       capacity: json['capacity'],
+    );
+  }
+
+  LibcalBooking _parseJsonBooking(Map json) {
+    return LibcalBooking(
+      bookingId: json['book_id'],
+      seatName: json['seat_name'],
+      locationName: json['location_name'],
+      slot: LibcalBookingSlot(from: json['from_date'], to: json['to_date']),
+      status: json['status'],
+      checkInCode: json['check_in_code'],
     );
   }
 }

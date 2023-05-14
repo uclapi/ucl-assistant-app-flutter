@@ -148,3 +148,23 @@ class LibcalGroupSpace extends LibcalSpace {
 
   final int capacity;
 }
+
+class LibcalBooking {
+  const LibcalBooking({
+    required this.bookingId,
+    required this.seatName,
+    required this.locationName,
+    required this.slot,
+    required this.status,
+    required this.checkInCode,
+    this.cancelledDate,
+  });
+
+  final String bookingId;
+  final String seatName;
+  final String locationName;
+  final LibcalBookingSlot slot;
+  final String status;
+  final String? cancelledDate;
+  final String checkInCode;
+}
