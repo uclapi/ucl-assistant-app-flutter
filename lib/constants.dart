@@ -21,5 +21,8 @@ const API_WORKSPACES_SUMMARY_URL = '$UCL_ASSISTANT_API_URL/workspaces/summary';
 const API_LIVE_IMAGE_URL =
     '$UCL_ASSISTANT_API_URL/workspaces/getliveimage/map.svg';
 
+const API_LIBCAL_LOCATIONS_URL = '$UCL_ASSISTANT_API_URL/libcal/locations';
+const API_LIBCAL_SPACES_URL = '$UCL_ASSISTANT_API_URL/libcal/spaces';
+
 const SENTRY_DSN =
     'https://0f0063dcf47a4c05bf81c91a03bd41a6@o65122.ingest.sentry.io/4503966521425920';
