@@ -110,7 +110,8 @@ class _LibcalSpaceDetailState extends State<LibcalSpaceDetail> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
+      child: SingleChildScrollView(
         child: Column(
           children: [
             Row(
@@ -136,65 +137,67 @@ class _LibcalSpaceDetailState extends State<LibcalSpaceDetail> {
                 ),
               ],
             ),
-            Flexible(
-              fit: FlexFit.loose,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (widget.space.description.isNotEmpty) ...[
-                    Text(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (widget.space.description.isNotEmpty) ...[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      // Strip HTML tags, spaces, final new line; replace double new lines with single new lines
                       widget.space.description
-                          .replaceAll(RegExp(r"<[^>]*>|&nbsp;"), '')
+                          .replaceAll(RegExp(r"<[^>]*>|&nbsp;|\n$"), '')
                           .replaceAll(RegExp(r'\r\n\r\n'), '\n'),
                       style: Theme.of(context).textTheme.caption,
                     ),
-                  ],
-                  if (widget.space.image.isNotEmpty) ...[
-                    Image.network(
-                      // URLs beginning with "//" are by-default treated as "file://", but we know it's a network resource
-                      widget.space.image
-                          .replaceFirst(RegExp(r'^//'), 'https://'),
-                      height: 300,
-                    )
-                  ],
-                  const Header(text: 'Choose your slot'),
+                  )
+                ],
+                if (widget.space.image.isNotEmpty) ...[
+                  Image.network(
+                    // URLs beginning with "//" are by-default treated as "file://", but we know it's a network resource
+                    widget.space.image.replaceFirst(RegExp(r'^//'), 'https://'),
+                    height: 300,
+                  )
+                ],
+                const Header(text: 'Choose your slot'),
+                HorizontalToggleButtons(
+                  label: 'From:',
+                  items: getFromTimes(),
+                  selected:
+                      getFromTimes().map((t) => t == chosenFromTime).toList(),
+                  onPressed: (index) {
+                    setState(() {
+                      chosenFromTime = getFromTimes()[index];
+                      chosenToTime = '';
+                    });
+                  },
+                ),
+                if (chosenFromTime.isNotEmpty) ...[
                   HorizontalToggleButtons(
-                    label: 'From:',
-                    items: getFromTimes(),
-                    selected:
-                        getFromTimes().map((t) => t == chosenFromTime).toList(),
+                    label: 'To:',
+                    items: getToTimes(chosenFromTime),
+                    selected: getToTimes(chosenFromTime)
+                        .map((t) => t == chosenToTime)
+                        .toList(),
                     onPressed: (index) {
                       setState(() {
-                        chosenFromTime = getFromTimes()[index];
-                        chosenToTime = '';
+                        chosenToTime = getToTimes(chosenFromTime)[index];
                       });
                     },
                   ),
-                  if (chosenFromTime.isNotEmpty) ...[
-                    HorizontalToggleButtons(
-                      label: 'To:',
-                      items: getToTimes(chosenFromTime),
-                      selected: getToTimes(chosenFromTime)
-                          .map((t) => t == chosenToTime)
-                          .toList(),
-                      onPressed: (index) {
-                        setState(() {
-                          chosenToTime = getToTimes(chosenFromTime)[index];
-                        });
-                      },
-                    ),
-                  ],
-                  if (chosenFromTime.isNotEmpty && chosenToTime.isNotEmpty) ...[
-                    GradientButton(
-                      onPressed: makeBooking,
-                      height: 50,
-                      child: Text('Book $chosenFromTime - $chosenToTime'),
-                    ),
-                  ],
                 ],
-              ),
+                if (chosenFromTime.isNotEmpty && chosenToTime.isNotEmpty) ...[
+                  GradientButton(
+                    onPressed: makeBooking,
+                    height: 50,
+                    child: Text('Book $chosenFromTime - $chosenToTime'),
+                  ),
+                ],
+              ],
             )
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
