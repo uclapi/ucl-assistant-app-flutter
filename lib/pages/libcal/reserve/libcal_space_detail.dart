@@ -41,7 +41,7 @@ class _LibcalSpaceDetailState extends State<LibcalSpaceDetail> {
               : null,
         );
 
-    if (!success) {
+    if (success) {
       AwesomeDialog(
         context: context,
         dialogType: DialogType.success,

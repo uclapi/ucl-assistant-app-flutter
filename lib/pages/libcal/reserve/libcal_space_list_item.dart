@@ -21,6 +21,7 @@ class LibcalSpaceListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => showModalBottomSheet(
         context: context,
         isScrollControlled: true,

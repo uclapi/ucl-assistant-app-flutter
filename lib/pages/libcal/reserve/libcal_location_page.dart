@@ -106,6 +106,7 @@ class _LibcalLocationPageState extends State<LibcalLocationPage> {
         child: Column(
           children: [
             GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onTap: showFilterPanel,
               child: Wrap(
                 spacing: 20,
