@@ -60,9 +60,7 @@ class LibcalAPI {
 
     final response = await client.post(
       Uri.parse('$API_LIBCAL_SPACES_URL/$spaceId/reserve'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'from': fromString,
         'to': toString,
@@ -75,7 +73,6 @@ class LibcalAPI {
     }
 
     final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
-    print(decodedResponse);
     return decodedResponse['content']['ok'];
   }
 
@@ -88,8 +85,22 @@ class LibcalAPI {
 
     final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
     return (decodedResponse['content']['bookings'] as List)
-        .map((space) => _parseJsonBooking(space))
+        .map((booking) => _parseJsonBooking(booking))
         .toList();
+  }
+
+  Future<bool> cancelBooking(String bookingId) async {
+    final response = await client.post(
+      Uri.parse(API_LIBCAL_CANCEL_BOOKING_URL),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'booking_id': bookingId}),
+    );
+    if (response.statusCode != 200) {
+      throw 'There was an error cancelling your booking';
+    }
+
+    final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;
+    return decodedResponse['content']['ok'];
   }
 
   LibcalLocation _parseJsonLocation(Map json) {
@@ -133,6 +144,7 @@ class LibcalAPI {
       slot: LibcalBookingSlot(from: json['from_date'], to: json['to_date']),
       status: json['status'],
       checkInCode: json['check_in_code'],
+      cancelledDate: json['cancelled'],
     );
   }
 }
