@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ucl_assistant/models/libcal.dart';
-import 'package:ucl_assistant/pages/book_libcal_seat/book_libcal_location_page.dart';
+import 'package:ucl_assistant/pages/libcal/reserve/libcal_location_page.dart';
 
 class LibcalLocationListItem extends StatelessWidget {
   const LibcalLocationListItem({super.key, required this.location});
@@ -13,8 +13,7 @@ class LibcalLocationListItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    BookLibcalLocationPage(location: location)),
+                builder: (context) => LibcalLocationPage(location: location)),
           );
         },
         child: Material(

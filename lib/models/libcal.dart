@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:ucl_assistant/helpers.dart';
 
 // Extract the contiguous time slots that this space is available for
-List<LibcalBookableSlot> getContiguousTimeRanges(List availability) {
-  List<LibcalBookableSlot> contiguousSlots = [];
+List<LibcalBookingSlot> getContiguousTimeRanges(List availability) {
+  List<LibcalBookingSlot> contiguousSlots = [];
   String lastFromTime = '';
   String lastToTime = '';
 
@@ -22,7 +23,7 @@ List<LibcalBookableSlot> getContiguousTimeRanges(List availability) {
     } else if (lastToTime.isNotEmpty && from.contains(lastToTime)) {
       lastToTime = to;
     } else {
-      contiguousSlots.add(LibcalBookableSlot(
+      contiguousSlots.add(LibcalBookingSlot(
           from: extractTimeString(lastFromTime),
           to: extractTimeString(lastToTime)));
       lastFromTime = '';
@@ -31,7 +32,7 @@ List<LibcalBookableSlot> getContiguousTimeRanges(List availability) {
   }
 
   if (lastFromTime.isNotEmpty && lastToTime.isNotEmpty) {
-    contiguousSlots.add(LibcalBookableSlot(
+    contiguousSlots.add(LibcalBookingSlot(
         from: extractTimeString(lastFromTime),
         to: extractTimeString(lastToTime)));
   }
@@ -39,17 +40,26 @@ List<LibcalBookableSlot> getContiguousTimeRanges(List availability) {
   return contiguousSlots;
 }
 
-class LibcalBookableSlot {
-  const LibcalBookableSlot({
+class LibcalBookingSlot {
+  const LibcalBookingSlot({
     required this.from,
     required this.to,
   });
 
+  // Constructor accepts 2 formats: "04:30" or "2021-01-14T09:00:00+00:00"
   final String from;
   final String to;
 
-  double get fromDivision => convertTimeStringToNumericDivision(from);
-  double get toDivision => convertTimeStringToNumericDivision(to);
+  // Map the second format to the first one
+  String get _fromTime => from.contains('T')
+      ? from.split('T').last.split(':').take(2).join(':')
+      : from;
+
+  String get _toTime =>
+      to.contains('T') ? to.split('T').last.split(':').take(2).join(':') : to;
+
+  double get fromDivision => convertTimeStringToNumericDivision(_fromTime);
+  double get toDivision => convertTimeStringToNumericDivision(_toTime);
 
   bool contains(String time) {
     double timeDivision = convertTimeStringToNumericDivision(time);
@@ -58,7 +68,7 @@ class LibcalBookableSlot {
 
   @override
   String toString() {
-    return '$from - $to';
+    return '$_fromTime - $_toTime';
   }
 }
 
@@ -89,9 +99,9 @@ class LibcalSpace {
   final bool isPowered;
   final String image;
   final List availability;
-  List<LibcalBookableSlot>? _contiguousSlots;
+  List<LibcalBookingSlot>? _contiguousSlots;
 
-  List<LibcalBookableSlot> get contiguousSlots =>
+  List<LibcalBookingSlot> get contiguousSlots =>
       _contiguousSlots ??= getContiguousTimeRanges(availability);
 }
 

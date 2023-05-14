@@ -3,18 +3,17 @@ import 'package:ucl_assistant/api/api.dart';
 import 'package:ucl_assistant/models/libcal.dart';
 import 'package:ucl_assistant/widgets/error_message.dart';
 import 'package:ucl_assistant/widgets/header.dart';
-import 'package:ucl_assistant/pages/book_libcal_seat/libcal_location_list_item.dart';
+import 'package:ucl_assistant/pages/libcal/reserve/libcal_location_list_item.dart';
 import 'package:ucl_assistant/widgets/loading.dart';
 
-class BookLibcalLocationsPage extends StatefulWidget {
-  const BookLibcalLocationsPage({super.key});
+class LibcalReservePage extends StatefulWidget {
+  const LibcalReservePage({super.key});
 
   @override
-  State<BookLibcalLocationsPage> createState() =>
-      _BookLibcalLocationsPageState();
+  State<LibcalReservePage> createState() => _LibcalReservePageState();
 }
 
-class _BookLibcalLocationsPageState extends State<BookLibcalLocationsPage> {
+class _LibcalReservePageState extends State<LibcalReservePage> {
   bool loading = true;
   String? errorMessage;
   List<LibcalLocation> locationResults = [];
@@ -65,7 +64,7 @@ class _BookLibcalLocationsPageState extends State<BookLibcalLocationsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Header(text: "Book a study space", bold: true),
+                const Header(text: "Reserve a study space", bold: true),
                 const Text('Choose a location:'),
                 if (loading) ...[
                   const Loading()

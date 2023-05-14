@@ -4,21 +4,21 @@ import 'package:ucl_assistant/constants.dart';
 import 'package:ucl_assistant/helpers.dart';
 import 'package:ucl_assistant/models/libcal.dart';
 import 'package:ucl_assistant/widgets/error_message.dart';
-import 'package:ucl_assistant/widgets/libcal_bookable_space_list_item.dart';
+import 'package:ucl_assistant/pages/libcal/reserve/libcal_space_list_item.dart';
 import 'package:ucl_assistant/widgets/libcal_filter_button.dart';
 import 'package:ucl_assistant/widgets/libcal_filter_panel.dart';
 import 'package:ucl_assistant/widgets/loading.dart';
 import 'package:collection/collection.dart';
 
-class BookLibcalLocationPage extends StatefulWidget {
-  const BookLibcalLocationPage({super.key, required this.location});
+class LibcalLocationPage extends StatefulWidget {
+  const LibcalLocationPage({super.key, required this.location});
   final LibcalLocation location;
 
   @override
-  State<BookLibcalLocationPage> createState() => _BookLibcalLocationPageState();
+  State<LibcalLocationPage> createState() => _LibcalLocationPageState();
 }
 
-class _BookLibcalLocationPageState extends State<BookLibcalLocationPage> {
+class _LibcalLocationPageState extends State<LibcalLocationPage> {
   bool singleSpace = true;
   int dayOffset = 0;
   String time = getClosestHalfHour();
@@ -43,7 +43,7 @@ class _BookLibcalLocationPageState extends State<BookLibcalLocationPage> {
             .firstWhereOrNull((slot) => slot.contains(time));
 
         if (contiguousSlot != null) {
-          items.add(LibcalBookableSpaceListItem(
+          items.add(LibcalSpaceListItem(
             space: space,
             date: date,
             startTime: contiguousSlot.from,
@@ -52,7 +52,7 @@ class _BookLibcalLocationPageState extends State<BookLibcalLocationPage> {
           ));
         }
       } else {
-        items.add(LibcalBookableSpaceListItem(
+        items.add(LibcalSpaceListItem(
           space: space,
           date: date,
           onDismiss: () => setState(() => _refreshKey = UniqueKey()),

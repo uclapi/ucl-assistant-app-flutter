@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ucl_assistant/helpers.dart';
 import 'package:ucl_assistant/models/libcal.dart';
-import 'package:ucl_assistant/pages/book_libcal_seat/libcal_space_detail.dart';
+import 'package:ucl_assistant/pages/libcal/reserve/libcal_space_detail.dart';
 
-class LibcalBookableSpaceListItem extends StatelessWidget {
-  const LibcalBookableSpaceListItem(
+class LibcalSpaceListItem extends StatelessWidget {
+  const LibcalSpaceListItem(
       {super.key,
       required this.space,
       required this.date,
@@ -58,9 +58,9 @@ class LibcalBookableSpaceListItem extends StatelessWidget {
                       space.isPowered ? Icons.power : Icons.power_off,
                       size: 20,
                       color: space.isPowered ? Colors.grey : Colors.red,
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
             Text(
