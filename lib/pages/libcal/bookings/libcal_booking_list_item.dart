@@ -5,8 +5,10 @@ import 'package:ucl_assistant/models/libcal.dart';
 import 'package:ucl_assistant/widgets/gradient_button.dart';
 
 class LibcalBookingListItem extends StatelessWidget {
-  const LibcalBookingListItem({super.key, required this.booking});
+  const LibcalBookingListItem(
+      {super.key, required this.booking, required this.refreshBookings});
   final LibcalBooking booking;
+  final Function() refreshBookings;
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +38,15 @@ class LibcalBookingListItem extends StatelessWidget {
                       onPressed: () async {
                         final success = await API()
                             .libcal()
-                            .cancelBooking(booking.bookingId);
+                            .cancelBooking(booking.bookingId)
+                            .catchError((e) => false);
 
                         if (success) {
                           AwesomeDialog(
                             context: context,
                             dialogType: DialogType.success,
                             title: 'Booking Cancelled',
-                            btnOkOnPress: () => Navigator.pop(context),
+                            btnOkOnPress: refreshBookings,
                           ).show();
                         } else {
                           AwesomeDialog(
@@ -52,7 +55,7 @@ class LibcalBookingListItem extends StatelessWidget {
                             title: 'Cancellation Failed',
                             desc:
                                 'There was an error cancelling your slot. Please try again.',
-                            btnOkOnPress: () => Navigator.pop(context),
+                            btnOkOnPress: refreshBookings,
                             btnOkColor: Colors.red,
                             btnOkText: 'Close',
                           ).show();

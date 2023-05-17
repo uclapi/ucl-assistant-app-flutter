@@ -76,9 +76,9 @@ class LibcalAPI {
     return decodedResponse['content']['ok'];
   }
 
-  Future<List<LibcalBooking>> getPersonalBookings() async {
-    final response =
-        await client.get(Uri.parse(API_LIBCAL_PERSONAL_BOOKINGS_URL));
+  Future<List<LibcalBooking>> getPersonalBookings(bool forceUpdate) async {
+    final response = await client.get(Uri.parse(
+        '$API_LIBCAL_PERSONAL_BOOKINGS_URL?force=${forceUpdate ? 1 : 0}'));
     if (response.statusCode != 200) {
       throw 'There was an error loading your bookings :(';
     }
@@ -139,7 +139,8 @@ class LibcalAPI {
   LibcalBooking _parseJsonBooking(Map json) {
     return LibcalBooking(
       bookingId: json['book_id'],
-      seatName: json['seat_name'],
+      seatName:
+          json.containsKey('seat_name') ? json['seat_name'] : json['item_name'],
       locationName: json['location_name'],
       slot: LibcalBookingSlot(from: json['from_date'], to: json['to_date']),
       status: json['status'],

@@ -20,12 +20,11 @@ class _LibcalBookingsPageState extends State<LibcalBookingsPage> {
   String? errorMessage;
   List<LibcalBooking> bookingResults = [];
 
-  @override
-  void initState() {
-    super.initState();
+  void fetchBookings(bool forceUpdate) {
+    setState(() => loading = true);
     API()
         .libcal()
-        .getPersonalBookings()
+        .getPersonalBookings(forceUpdate)
         .then((bookings) => setState(() {
               bookingResults = bookings;
               loading = false;
@@ -35,6 +34,12 @@ class _LibcalBookingsPageState extends State<LibcalBookingsPage> {
               errorMessage = e.toString();
               loading = false;
             }));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchBookings(false);
   }
 
   List<Widget> getListItems() {
@@ -48,7 +53,10 @@ class _LibcalBookingsPageState extends State<LibcalBookingsPage> {
         items.add(Header(text: '${getDayName(date.weekday)}, $dateString'));
       }
       dates.add(dateString);
-      items.add(LibcalBookingListItem(booking: booking));
+      items.add(LibcalBookingListItem(
+        booking: booking,
+        refreshBookings: () => fetchBookings(true),
+      ));
     }
 
     return items;
