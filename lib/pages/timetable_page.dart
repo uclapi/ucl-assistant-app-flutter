@@ -125,10 +125,10 @@ class _TimetablePageState extends State<TimetablePage> {
               ] else if (timetableEntries.values
                   .every((entries) => entries.isEmpty)) ...[
                 const Spacer(),
-                Flexible(
+                const Flexible(
                   flex: 4,
                   child: Column(
-                    children: const [
+                    children: [
                       Text('Nothing scheduled this week.'),
                       Text('Take it easy!'),
                       UndrawImage('relaxing_at_home'),

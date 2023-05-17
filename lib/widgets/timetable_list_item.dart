@@ -35,16 +35,16 @@ class TimetableListItem extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(5, 3, 0, 0),
                       child: Text(
                         timetableEntry.moduleCode,
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     )
                   ],
                 ),
                 Text(
                     '${timetableEntry.startTime} - ${timetableEntry.endTime} • ${timetableEntry.lecturerName}',
-                    style: Theme.of(context).textTheme.caption),
+                    style: Theme.of(context).textTheme.bodySmall),
                 Text(timetableEntry.location['name'] ?? 'Online',
-                    style: Theme.of(context).textTheme.caption)
+                    style: Theme.of(context).textTheme.bodySmall)
               ],
             ),
             if (timetableEntry.location['name'] != null) ...[

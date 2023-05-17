@@ -30,7 +30,7 @@ class LibcalBookingListItem extends StatelessWidget {
                 Text(booking.slot.toString()),
                 Text(
                   booking.status,
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.bodySmall,
                 ),
                 if (booking.cancelledDate == null) ...[
                   GradientButton(

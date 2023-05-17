@@ -5,7 +5,6 @@ import 'package:ucl_assistant/models/libcal.dart';
 import 'package:ucl_assistant/pages/libcal/bookings/libcal_booking_list_item.dart';
 import 'package:ucl_assistant/widgets/error_message.dart';
 import 'package:ucl_assistant/widgets/header.dart';
-import 'package:ucl_assistant/pages/libcal/reserve/libcal_location_list_item.dart';
 import 'package:ucl_assistant/widgets/loading.dart';
 
 class LibcalBookingsPage extends StatefulWidget {
@@ -43,7 +42,7 @@ class _LibcalBookingsPageState extends State<LibcalBookingsPage> {
   }
 
   List<Widget> getListItems() {
-    Set<String> dates = Set();
+    Set<String> dates = {};
     List<Widget> items = [];
     for (var i = 0; i < bookingResults.length; i++) {
       final booking = bookingResults[i];

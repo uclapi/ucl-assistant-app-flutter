@@ -42,7 +42,7 @@ class StudySpaceListItem extends StatelessWidget {
                     Text(studySpace.name, overflow: TextOverflow.ellipsis),
                     Text(
                       '${studySpace.capacity - studySpace.occupied}/${studySpace.capacity} seats available',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     )
                   ],
                 ),

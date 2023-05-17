@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ucl_assistant/pages/libcal/libcal_page.dart';
-import 'package:ucl_assistant/pages/libcal/reserve/libcal_reserve_page.dart';
 import 'package:ucl_assistant/pages/search/search_page.dart';
 import 'package:ucl_assistant/pages/settings_page.dart';
 import 'package:ucl_assistant/pages/timetable_page.dart';

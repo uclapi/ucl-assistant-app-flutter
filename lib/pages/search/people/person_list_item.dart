@@ -27,7 +27,7 @@ class PersonListItem extends StatelessWidget {
                   children: [
                     Text(person.name, overflow: TextOverflow.ellipsis),
                     Text(person.department,
-                        style: Theme.of(context).textTheme.caption)
+                        style: Theme.of(context).textTheme.bodySmall)
                   ],
                 ),
               ),

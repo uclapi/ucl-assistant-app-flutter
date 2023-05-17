@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:ucl_assistant/helpers.dart';
 
 // Extract the contiguous time slots that this space is available for

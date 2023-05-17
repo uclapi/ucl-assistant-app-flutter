@@ -14,7 +14,7 @@ class Stat extends StatelessWidget {
           '$num',
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        Text(label, style: Theme.of(context).textTheme.caption),
+        Text(label, style: Theme.of(context).textTheme.bodySmall),
       ],
     );
   }

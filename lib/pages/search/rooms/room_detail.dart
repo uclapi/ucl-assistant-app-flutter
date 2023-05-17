@@ -47,11 +47,11 @@ class RoomDetail extends StatelessWidget {
                 children: [
                   Text(
                     room.classification,
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Text(
                     'Capacity: ${room.capacity}',
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),

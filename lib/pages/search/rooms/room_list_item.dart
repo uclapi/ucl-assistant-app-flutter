@@ -39,7 +39,7 @@ class RoomListItem extends StatelessWidget {
                   children: [
                     Text(room.name, overflow: TextOverflow.ellipsis),
                     Text(room.classification,
-                        style: Theme.of(context).textTheme.caption)
+                        style: Theme.of(context).textTheme.bodySmall)
                   ],
                 ),
               ),

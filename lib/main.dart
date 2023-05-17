@@ -69,8 +69,8 @@ class _MyAppState extends State<MyApp> {
           onSurface: Colors.black,
         ),
         textTheme: const TextTheme(
-          caption: TextStyle(color: Color(0xff666785), fontSize: 14),
-          bodyText2: TextStyle(color: Colors.black, fontSize: 16, height: 1.5),
+          bodySmall: TextStyle(color: Color(0xff666785), fontSize: 14),
+          bodyMedium: TextStyle(color: Colors.black, fontSize: 16, height: 1.5),
         ),
         iconTheme: const IconThemeData(color: Colors.grey),
       ),

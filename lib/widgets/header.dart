@@ -23,7 +23,7 @@ class Header extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 25,
-          color: color ?? Theme.of(context).textTheme.caption!.color,
+          color: color ?? Theme.of(context).textTheme.bodySmall!.color,
           fontWeight: bold ? FontWeight.bold : FontWeight.w300,
         ),
       ),

@@ -68,7 +68,7 @@ class LibcalSpaceListItem extends StatelessWidget {
                 startTime != null && endTime != null
                     ? 'available ${extractTimeString(startTime!)} - ${extractTimeString(endTime!)}'
                     : 'available ${space.contiguousSlots.join(', ')}',
-                style: Theme.of(context).textTheme.caption),
+                style: Theme.of(context).textTheme.bodySmall),
           ],
         ),
       ),

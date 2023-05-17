@@ -148,7 +148,7 @@ class _LibcalSpaceDetailState extends State<LibcalSpaceDetail> {
                       widget.space.description
                           .replaceAll(RegExp(r"<[^>]*>|&nbsp;|\n$"), '')
                           .replaceAll(RegExp(r'\r\n\r\n'), '\n'),
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   )
                 ],

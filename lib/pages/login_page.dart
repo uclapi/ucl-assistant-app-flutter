@@ -46,9 +46,9 @@ class LoginPage extends StatelessWidget {
                           (route) => false);
                     }
                   }),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Image(
                         image: AssetImage('assets/uclapi.png'),
                         height: 40,

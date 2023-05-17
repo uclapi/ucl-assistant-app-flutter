@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ucl_assistant/pages/libcal/bookings/libcal_bookings_page.dart';
 import 'package:ucl_assistant/pages/libcal/reserve/libcal_reserve_page.dart';
-import 'package:ucl_assistant/pages/search/people/person_search_page.dart';
-import 'package:ucl_assistant/pages/search/rooms/room_search_page.dart';
-import 'package:ucl_assistant/pages/search/study_spaces/study_space_search_page.dart';
 
 class LibcalPage extends StatefulWidget {
   const LibcalPage({super.key});

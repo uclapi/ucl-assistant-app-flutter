@@ -78,9 +78,9 @@ class SettingsPage extends StatelessWidget {
                               "mailto:isd.apiteam@ucl.ac.uk?subject=Feedback%20about%20UCL%20Assistant&body=I've%20been%20using%20UCL%20Assistant%20and%20I%20just%20wanted%20to%20tell%20you%20...%0D%0A%0D%0ATechnical%20Information%3A${jsonEncode(feedbackTechnicalInformation)}"),
                     ],
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Header(text: "Credits"),
                       Text(
                           'Originally created by Matt Bell (class of 2018) using the UCL API.\n'),
