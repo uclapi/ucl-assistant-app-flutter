@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:ucl_assistant/api/api_client.dart';
+import 'package:ucl_assistant/api/libcal_api.dart';
 import 'package:ucl_assistant/api/people_api.dart';
 import 'package:ucl_assistant/api/rooms_api.dart';
 import 'package:ucl_assistant/api/timetable_api.dart';
@@ -34,5 +35,9 @@ class API {
 
   WorkspacesAPI workspaces() {
     return WorkspacesAPI(client: _client);
+  }
+
+  LibcalAPI libcal() {
+    return LibcalAPI(client: _client);
   }
 }

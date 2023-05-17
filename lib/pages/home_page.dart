@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ucl_assistant/pages/libcal/libcal_page.dart';
+import 'package:ucl_assistant/pages/libcal/reserve/libcal_reserve_page.dart';
 import 'package:ucl_assistant/pages/search/search_page.dart';
 import 'package:ucl_assistant/pages/settings_page.dart';
 import 'package:ucl_assistant/pages/timetable_page.dart';
@@ -10,11 +12,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         body: const TabBarView(
           physics: NeverScrollableScrollPhysics(),
-          children: [TimetablePage(), SearchPage(), SettingsPage()],
+          children: [
+            TimetablePage(),
+            LibcalPage(),
+            SearchPage(),
+            SettingsPage()
+          ],
         ),
         appBar: AppBar(
           toolbarHeight: 0,
@@ -33,6 +40,7 @@ class HomePage extends StatelessWidget {
               Tab(
                   icon: Icon(Icons.calendar_month, size: 25),
                   text: 'Timetable'),
+              Tab(icon: Icon(Icons.desk, size: 25), text: 'Reserve'),
               Tab(icon: Icon(Icons.search, size: 25), text: 'Search'),
               Tab(icon: Icon(Icons.settings, size: 25), text: 'Settings'),
             ],
