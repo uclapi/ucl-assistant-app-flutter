@@ -22,7 +22,7 @@ jobs:
         run: |
           BUILD_NUMBER=`grep 'version:' pubspec.yaml | cut -d '+' -f 2`
           NEW_BUILD_NUMBER=$(($BUILD_NUMBER + 1))
-          sed -i "s/version: .*/version: ${{ steps.version.outputs.content }}+$NEW_BUILD_NUMBER/g" pubspec.yaml
+          sed -i "s/version: .*/version: $UCLAPI_VERSION+$NEW_BUILD_NUMBER/g" pubspec.yaml
       - name: Create commits
         env:
           VERSION: "${{ github.event.inputs.version }}"
