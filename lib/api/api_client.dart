@@ -19,7 +19,7 @@ class APIClient extends http.BaseClient {
       throw 'There was an error fetching this information';
     });
 
-    if (response.statusCode == 401) {
+    if (response.statusCode == 401 || response.statusCode == 403) {
       signOut().then((success) {
         if (success) {
           Navigator.pushAndRemoveUntil(
